@@ -18,7 +18,7 @@ public class Demo {
     public static void main(String[] args) throws TwilioRestException {
         TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
 
-        // Build a filter for the MessageList
+        // Create parameters to send a new message
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("Body",
                 "Jenny please?! I love you <3"));
