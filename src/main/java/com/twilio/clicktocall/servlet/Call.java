@@ -51,7 +51,8 @@ public class Call extends HttpServlet {
         response.getOutputStream().write(getJSONResponse(e.getMessage()).getBytes());
         return;
       }
-      String path = request.getRequestURL().toString().replace(request.getRequestURI(), "") + "/connect";
+      String path =
+          request.getRequestURL().toString().replace(request.getRequestURI(), "") + "/connect";
       params.put("From", twilioNumber);
       params.put("To", phoneNumber);
       params.put("Url", path);
@@ -65,9 +66,9 @@ public class Call extends HttpServlet {
         return;
       }
       response.getOutputStream().write(getJSONResponse("Phone call incoming!").getBytes());
-    }
-    else {
-      response.getOutputStream().write(getJSONResponse("The phone number field can't be empty").getBytes());
+    } else {
+      response.getOutputStream()
+          .write(getJSONResponse("The phone number field can't be empty").getBytes());
     }
   }
 

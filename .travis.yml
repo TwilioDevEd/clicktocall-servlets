@@ -1,6 +1,7 @@
 language: java
 jdk:
 - oraclejdk7
+sudo: false
 env:
   global:
     - TWILIO_ACCOUNT_SID=YOUR-TWILIO-ACCOUNT-SID
