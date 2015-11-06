@@ -14,16 +14,6 @@ public class AppSetup {
     this.env = System.getenv();
   }
 
-  public int getPortNumber() {
-    String port = env.get("PORT");
-
-    if (port != null) {
-      return Integer.parseInt(port);
-    } else {
-      return 4567;
-    }
-  }
-
   public String getAccountSid() throws UndefinedEnvironmentVariableException {
     String sid = env.get("TWILIO_ACCOUNT_SID");
     if (sid == null) {
@@ -42,30 +32,12 @@ public class AppSetup {
     }
   }
 
-  public String getTwilioPhoneNumber() throws UndefinedEnvironmentVariableException {
+  public String getTwilioNumber() throws UndefinedEnvironmentVariableException {
     String phoneNumber = env.get("TWILIO_NUMBER");
     if (phoneNumber == null) {
       throw new UndefinedEnvironmentVariableException("TWILIO_NUMBER is not set");
     } else {
       return phoneNumber;
-    }
-  }
-
-  public String getApplicationSid() throws UndefinedEnvironmentVariableException {
-    String sid = env.get("TWILIO_APPLICATION_SID");
-    if (sid == null) {
-      throw new UndefinedEnvironmentVariableException("TWILIO_APPLICATION_SID is not set");
-    } else {
-      return sid;
-    }
-  }
-
-  public String getConferenceNumber() throws UndefinedEnvironmentVariableException {
-    String number = env.get("TWILIO_RR_NUMBER");
-    if (number == null) {
-      throw new UndefinedEnvironmentVariableException("TWILIO_RR_NUMBER is not set");
-    } else {
-      return number;
     }
   }
 }
