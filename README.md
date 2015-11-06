@@ -1,7 +1,4 @@
-# COMING SOON: Click-To-Call
+# Click to Call Rails
+[![Build Status](https://travis-ci.org/TwilioDevEd/clicktocall-servlets.svg?branch=master)](https://travis-ci.org/TwilioDevEd/clicktocall-servlets)
 
-This is a demo application showcasing click-to-call functionality using Twilio in a Java servlet application.
-
-## License
-
-MIT
+An example application implementing Click to Call using Twilio.
