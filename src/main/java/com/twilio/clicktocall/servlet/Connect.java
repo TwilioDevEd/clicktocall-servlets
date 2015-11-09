@@ -98,7 +98,6 @@ public class Connect extends HttpServlet {
 
     String signature = request.getHeader("X-Twilio-Signature");
 
-
     return validator.validateRequest(signature, url, params);
   }
 }
