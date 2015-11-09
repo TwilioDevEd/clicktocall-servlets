@@ -27,6 +27,13 @@ public class Call extends HttpServlet {
     this.client = client;
   }
 
+  /**
+   * Method that triggers a call to the specified number in the request
+   * @param request incoming servlet request object
+   * @param response servlet response object
+   * @throws ServletException
+   * @throws IOException
+   */
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     String phoneNumber = request.getParameter("phone");
@@ -44,13 +51,15 @@ public class Call extends HttpServlet {
       }
 
       Map<String, String> params = new HashMap<>();
-      String twilioNumber = null;
+      String twilioNumber;
       try {
         twilioNumber = appSetup.getTwilioNumber();
       } catch (UndefinedEnvironmentVariableException e) {
         response.getOutputStream().write(getJSONResponse(e.getMessage()).getBytes());
         return;
       }
+
+      // Full path to the end point that will respond with the call TwiML
       String path =
           request.getRequestURL().toString().replace(request.getRequestURI(), "") + "/connect";
       params.put("From", twilioNumber);

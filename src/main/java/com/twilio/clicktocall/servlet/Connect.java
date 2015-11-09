@@ -30,6 +30,14 @@ public class Connect extends HttpServlet {
     this.validator = validator;
   }
 
+  /**
+   * Method that handles /connect request and responds with the TwiML after validating
+   * the authenticity of the request
+   * @param request incoming servlet request object
+   * @param response servlet response object
+   * @throws ServletException
+   * @throws IOException
+   */
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     if (this.appSetup == null) {
@@ -43,6 +51,10 @@ public class Connect extends HttpServlet {
     }
   }
 
+  /**
+   * Generates the TwiML with a Say and Hangout verb
+   * @return String with the TwiML
+   */
   private String getXMLResponse() {
     TwiMLResponse twimlResponse = new TwiMLResponse();
 
@@ -60,6 +72,11 @@ public class Connect extends HttpServlet {
     return twimlResponse.toXML();
   }
 
+  /**
+   * Uses TwilioUtils to validate that the incoming request comes from Twilio automated services
+   * @param request passed servlet request to extract parameters necessary for validation
+   * @return boolean determining validity of the request
+   */
   private boolean isValidRequest(HttpServletRequest request) {
     if (this.validator == null) {
       try {

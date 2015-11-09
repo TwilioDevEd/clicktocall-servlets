@@ -53,8 +53,7 @@ public class ConnectTest {
 
     connect.doPost(mockRequest, mockResponse);
 
-
-
+    verify(mockValidator).validateRequest("twilio_signature", "http://some_url/connect", params);
     verify(mockOutputStream).write(getXMLResponse().getBytes());
   }
 
@@ -89,6 +88,7 @@ public class ConnectTest {
 
     connect.doPost(mockRequest, mockResponse);
 
+    verify(mockValidator).validateRequest("twilio_signature", "http://some_url/connect", params);
     verify(mockOutputStream).write("Invalid twilio request".getBytes());
   }
 
