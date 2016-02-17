@@ -3,6 +3,8 @@
 
 An example application implementing Click to Call using Twilio.
 
+[Read the full tutorial here](https://www.twilio.com/docs/tutorials/walkthrough/click-to-call/java/servlets)!
+
 ### Run the application
 
 1. Clone the repository and `cd` into it.
