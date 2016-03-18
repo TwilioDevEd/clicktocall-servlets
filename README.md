@@ -8,7 +8,9 @@ An example application implementing Click to Call using Twilio.
 ### Run the application
 
 1. Clone the repository and `cd` into it.
+
 1. The application uses Maven to manage dependencies.
+
 1. Edit the sample configuration file `.env.example` and edit it to match your configuration.
 
    Once you have edited the `.env.example` file, if you are using a unix operating system,
@@ -27,7 +29,8 @@ An example application implementing Click to Call using Twilio.
    You can buy Twilio phone numbers at [Twilio numbers](//www.twilio.com/user/account/phone-numbers/search)
    `TWILIO_NUMBER` should be set to the phone number you purchased above.
 
-1. Configure Twilio to call your webhooks
+1. Configure Twilio to call your webhooks.
+
    You will also need to configure Twilio to call your application when calls are received.
 
    You will need to provision at least one Twilio number with voice capabilities
@@ -47,13 +50,16 @@ An example application implementing Click to Call using Twilio.
    ```bash
    $ mvn compile && mvn jetty:run
    ```
+
    This will run the embedded Jetty application server that uses port 8080. You can change this value
-   in the [app's main file](//github.com/TwilioDevEd/clicktocall-servlets/blob/master/src/main/java/com/twilio/clicktocall/App.java)
+   on the [app's main file](//github.com/TwilioDevEd/clicktocall-servlets/blob/master/src/main/java/com/twilio/clicktocall/App.java)
+
 1. Expose the application to the wider Internet using [ngrok](https://ngrok.com/)
 
    ```bash
    $ ngrok 8080
    ```
+
    Once you have started ngrok, update your Twilio's number voice URL
    setting to use your ngrok hostname, so it will look something like
    this:
@@ -64,12 +70,13 @@ An example application implementing Click to Call using Twilio.
 
 ### Dependencies
 
-This application uses this Twilio helper library:
+This application uses this Twilio helper library.
+
 * [twilio-java](//github.com/twilio/twilio-java)
 
 ### Run the tests
 
-1. Run at the top-level directory:
+1. Run at the top-level directory.
 
    ```bash
    $ mvn compile test
