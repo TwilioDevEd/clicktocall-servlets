@@ -5,7 +5,7 @@ An example application implementing Click to Call using Twilio.
 
 [Read the full tutorial here](https://www.twilio.com/docs/tutorials/walkthrough/click-to-call/java/servlets)!
 
-### Run the application
+## Run the application
 
 1. Clone the repository and `cd` into it.
 
@@ -81,3 +81,9 @@ This application uses this Twilio helper library.
    ```bash
    $ mvn compile test
    ```
+
+## Meta
+
+* No warranty expressed or implied. Software is as is. Diggity.
+* [MIT License](http://www.opensource.org/licenses/mit-license.html)
+* Lovingly crafted by Twilio Developer Education.
