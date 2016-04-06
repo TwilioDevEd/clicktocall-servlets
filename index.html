@@ -43,13 +43,13 @@ API</a> and how to create a TwiML call logic using the
 <p>To create our click-to-call application we need to setup our environment first.</p>
 <p>Let&#39;s put our Twilio credentials in a place where our application can access them. For the
 purposes of this tutorial, we&#39;ll place them as environment variables that our application can read.</p>
-<p>You can find your Twilio credentials in your <a href="//www.twilio.com/user/account">Account Dashboard</a>.</p>
+<p>You can find your Twilio credentials in your <a href="//www.twilio.com/user/account/settings">Account Dashboard</a>.</p>
 <p>For more instructions on how to run the application refer to the <a href="//github.com/TwilioDevEd/clicktocall-servlets/blob/master/README.md">app&#39;s
 readme file</a>.</p>
 </div><div data-title="The Web Form" data-file="src/main/webapp/index.html" data-highlight="26-40" class="step"><h2 id="the-web-form">The Web Form</h2>
 <p>The first step to create a real click-to-call solution is by building the form that your
-user needs to fill on the web. No need to overthink this, the real goal is to POST the User&#39;s name
-and phone number to your controller.</p>
+user needs to fill on the web. No need to overthink this, the real goal is to POST the user&#39;s
+phone number to your controller.</p>
 <p>So what information does this form need? An input for the phone number and
 a submit button. Since the page doesn&#39;t need to render new content after clicking, we decided to
 implement the POST action via Ajax using jQuery. Let&#39;s take a look at it.</p>
@@ -88,6 +88,11 @@ because anyone on the internet can make a request to this end point, therefore a
 That is why we need to check if the request is made by Twilio servers before doing any operation
 on the Connect endpoint. We use an instance of <a href="//twilio.github.io/twilio-java/com/twilio/sdk/TwilioUtils.html">TwilioUtils</a> and call the validate
 method using the the required parameters.</p>
+<hr>
+<p><strong>See Also:</strong></p>
+<ul>
+<li><a href="//www.twilio.com/docs/api/security#validating-requests">Validate Twilio Requests</a></li>
+</ul>
 </div><div data-title="Generating TwiML" data-file="src/main/java/com/twilio/clicktocall/servlet/Connect.java" data-highlight="58-73" class="step"><h2 id="generating-twiml">Generating TwiML</h2>
 <p>TwiML is a set of <a href="//www.twilio.com/docs/api/twiml#verbs">simple verbs</a> written in XML that Twilio reads as instructions.
 In this case our instructions inform Twilio to simply SAY something to the user. If we wanted
@@ -95,7 +100,8 @@ to connect the user to a real support agent, we would have to add a
 <a href="//www.twilio.com/docs/api/twiml/dial">Dial verb</a> that specifies the support agent number
 so the customer can talk to him/her.</p>
 <p>In order to make writing TwiML easy, many of the helper libraries have methods that generate
-TwiML for you. In this case we use twilio-java to create a TwiML response that will instruct
+TwiML for you. In this case we use <a href="//www.twilio.com/docs/java/install">twilio-java</a>
+to create a TwiML response that will instruct
 Twilio to say something.</p>
 </div><div data-title="Where to Next?" class="step"><h2 id="where-to-next-">Where to next?</h2>
 <p>That&#39;s it! We&#39;ve just implemented click to call that allow your customers to connect with a

@@ -44,7 +44,7 @@
       Let's put our Twilio credentials in a place where our application can access them. For the
       purposes of this tutorial, we'll place them as environment variables that our application can read.
 
-      You can find your Twilio credentials in your [Account Dashboard](//www.twilio.com/user/account).
+      You can find your Twilio credentials in your [Account Dashboard](//www.twilio.com/user/account/settings).
 
       For more instructions on how to run the application refer to the [app's
       readme file](//github.com/TwilioDevEd/clicktocall-servlets/blob/master/README.md).
@@ -54,8 +54,8 @@
       ## The Web Form
 
       The first step to create a real click-to-call solution is by building the form that your
-      user needs to fill on the web. No need to overthink this, the real goal is to POST the User's name
-      and phone number to your controller.
+      user needs to fill on the web. No need to overthink this, the real goal is to POST the user's
+      phone number to your controller.
 
       So what information does this form need? An input for the phone number and
       a submit button. Since the page doesn't need to render new content after clicking, we decided to
@@ -85,6 +85,7 @@
     data-highlight="39-76")
     :markdown
       ## Making a Phone Call
+
       Making a phone call using Twilio in Java is very easy.
 
       First we initiate a `client` object with our Account SID and Auth Token. This is essentially
@@ -118,6 +119,11 @@
       on the Connect endpoint. We use an instance of [TwilioUtils][utils] and call the validate
       method using the the required parameters.
 
+      ---
+
+      **See Also:**
+      * [Validate Twilio Requests](//www.twilio.com/docs/api/security#validating-requests)
+
       [utils]: //twilio.github.io/twilio-java/com/twilio/sdk/TwilioUtils.html
 
   .step(data-title='Generating TwiML', data-file='src/main/java/com/twilio/clicktocall/servlet/Connect.java',
@@ -132,7 +138,8 @@
       so the customer can talk to him/her.
 
       In order to make writing TwiML easy, many of the helper libraries have methods that generate
-      TwiML for you. In this case we use twilio-java to create a TwiML response that will instruct
+      TwiML for you. In this case we use [twilio-java](//www.twilio.com/docs/java/install)
+      to create a TwiML response that will instruct
       Twilio to say something.
 
       [verbs]: //www.twilio.com/docs/api/twiml#verbs
