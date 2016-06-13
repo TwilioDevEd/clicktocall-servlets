@@ -1,13 +1,13 @@
 .chapter(data-title='Click to Call Servlets')
   .step(data-title='How It Works', data-file='src/main/java/com/twilio/clicktocall/App.java')
     :markdown
-      ## How It Works
+      ## Click to Call Servlets
 
       Let's go over the necessary steps to implement click-to-call:
 
       ![Click-to-call Diagram](//s3-us-west-2.amazonaws.com/deved/clicktocall.png)
 
-      1. A website visitor wants to connect to your organization.  She submits a web form with her
+      1. A website visitor wants to connect to your organization.  They submit a web form with their
       phone number to receive a call connecting her to your sales or support team.
 
       1. Your web application receives the submission form.  An HTTP request is initiated from your
@@ -61,9 +61,9 @@
       a submit button. Since the page doesn't need to render new content after clicking, we decided to
       implement the POST action via Ajax using jQuery. Let's take a look at it.
 
-  .step(data-title='Submit the Form', data-file='src/main/webapp/js/clicktocall.js', data-highlight="11-30")
+  .step(data-title='Submitting the Form', data-file='src/main/webapp/js/clicktocall.js', data-highlight="11-30")
     :markdown
-      ## Submit the Form
+      ## Submitting the Form
 
       To make the click to call feature more seamless we used
       [Ajax](https://developer.mozilla.org/en-US/docs/AJAX) to send the form asynchronously. This
@@ -72,7 +72,7 @@
       This code does the following:
 
       * Watches for the user "submitting" the form element
-      * Submits the form data to our controller
+      * Submits the form's data to our controller
       * Lets the user know if the submission was successful or not
 
       This is a common implementation of jQuery's $.ajax() method. Notice that we are
@@ -95,8 +95,8 @@
 
       Next we'll use the REST API to [make an outgoing phone call][voice] which
       requires us to pass a From number, a To number and the [URL Parameter][url]
-      that tells Twilio what to do after it
-      connects the call to our user. In this case Twilio needs to dial in the Agent once the call has
+      that tells Twilio what to do after it connects the call to our user. In this
+      case Twilio needs to dial in the Agent once the call has
       been placed. We'll discuss this more in the next step.
 
       Assuming we have succesfully connected our user to our agent, we need to send a response to the
@@ -105,14 +105,14 @@
       [voice]: //www.twilio.com/docs/api/rest/making-calls
       [url]: //www.twilio.com/docs/api/rest/making-calls#url-parameter
 
-  .step(data-title='Validating Twilio Request', data-file='src/main/java/com/twilio/clicktocall/servlet/Connect.java',
+  .step(data-title="Validating Twilio's Request", data-file='src/main/java/com/twilio/clicktocall/servlet/Connect.java',
     data-highlight='80-103')
     :markdown
-      ## Validating Twilio Request
+      ## Validating Twilio's Request
 
       Twilio makes a request to our application when the call is created using the REST API. This
-      means that we need to create and end point that is publicly available for internet requests.
-      
+      means that we need to create an end point that is publicly available for internet requests.
+
       TwiML sometimes can contain sensible information such as phone numbers, so it's vulnerable
       because anyone on the internet can make a request to this end point, therefore accessing our TwiML.
       That is why we need to check if the request is made by Twilio servers before doing any operation
@@ -134,7 +134,7 @@
       TwiML is a set of [simple verbs][verbs] written in XML that Twilio reads as instructions.
       In this case our instructions inform Twilio to simply SAY something to the user. If we wanted
       to connect the user to a real support agent, we would have to add a
-      [Dial verb](//www.twilio.com/docs/api/twiml/dial) that specifies the support agent number
+      [Dial verb](//www.twilio.com/docs/api/twiml/dial) that specifies the support agent's number
       so the customer can talk to him/her.
 
       In order to make writing TwiML easy, many of the helper libraries have methods that generate
@@ -166,6 +166,6 @@
 
       ### Did this help?
 
-      Thanks for checking out this tutorial! If you have any feedback
+      Thanks for checking this tutorial out! If you have any feedback
       to share with us, we'd love to hear it.
-      [Contact support](//www.twilio.com/help/contact) to let us know what you think.
+      [Contact the Twilio Developer Education Team](mailto:deved-oss@twilio.com) to let us know what you think.
