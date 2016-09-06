@@ -22,11 +22,17 @@
             <version>${jetty.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20160810</version>
+        </dependency>
+
         <!-- Twilio -->
         <dependency>
             <groupId>com.twilio.sdk</groupId>
-            <artifactId>twilio-java-sdk</artifactId>
-            <version>5.4.0</version>
+            <artifactId>twilio</artifactId>
+            <version>LATEST</version>
         </dependency>
 
         <!-- Testing -->
