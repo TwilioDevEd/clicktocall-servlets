@@ -81,8 +81,10 @@
       Now that we have the front end done lets build the back end that will receive this data and
       call the user.
 
-  .step(data-title='Making a Phone Call', data-file='src/main/java/com/twilio/clicktocall/servlet/Call.java',
-    data-highlight="39-76")
+  .step(
+      data-title='Making a Phone Call',
+      data-file='src/main/java/com/twilio/clicktocall/servlet/CallServlet.java',
+      data-highlight="26-34, 42-76")
     :markdown
       ## Making a Phone Call
 
@@ -105,8 +107,10 @@
       [voice]: //www.twilio.com/docs/api/rest/making-calls
       [url]: //www.twilio.com/docs/api/rest/making-calls#url-parameter
 
-  .step(data-title="Validating Twilio's Request", data-file='src/main/java/com/twilio/clicktocall/servlet/Connect.java',
-    data-highlight='80-103')
+  .step(
+      data-title="Validating Twilio's Request",
+      data-file='src/main/java/com/twilio/clicktocall/servlet/ConnectServlet.java',
+      data-highlight='77-95')
     :markdown
       ## Validating Twilio's Request
 
@@ -116,7 +120,7 @@
       TwiML sometimes can contain sensible information such as phone numbers, so it's vulnerable
       because anyone on the internet can make a request to this end point, therefore accessing our TwiML.
       That is why we need to check if the request is made by Twilio servers before doing any operation
-      on the Connect endpoint. We use an instance of [TwilioUtils][utils] and call the validate
+      on the Connect endpoint. We use an instance of [RequestValidator][request-validator] and call the validate
       method using the the required parameters.
 
       ---
@@ -124,10 +128,12 @@
       **See Also:**
       * [Validate Twilio Requests](//www.twilio.com/docs/api/security#validating-requests)
 
-      [utils]: //twilio.github.io/twilio-java/com/twilio/sdk/TwilioUtils.html
+      [request-validator]: //github.com/twilio/twilio-java/blob/next-gen/src/main/java/com/twilio/security/RequestValidator.java
 
-  .step(data-title='Generating TwiML', data-file='src/main/java/com/twilio/clicktocall/servlet/Connect.java',
-    data-highlight='58-73')
+  .step(
+    data-title='Generating TwiML',
+    data-file='src/main/java/com/twilio/clicktocall/servlet/ConnectServlet.java',
+    data-highlight='56-75')
     :markdown
       ## Generating TwiML
 
