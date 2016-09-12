@@ -1,6 +1,8 @@
 package com.twilio.clicktocall.servlet;
 
+import com.twilio.clicktocall.exceptions.UndefinedEnvironmentVariableException;
 import com.twilio.clicktocall.lib.AppSetup;
+import com.twilio.security.RequestValidator;
 import com.twilio.twiml.Hangup;
 import com.twilio.twiml.Say;
 import com.twilio.twiml.TwiMLException;
@@ -12,17 +14,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet("/connect")
 public class ConnectServlet extends HttpServlet {
+    private RequestValidator requestValidator;
     private ResponseWriter responseWriter;
 
     @SuppressWarnings("unused")
-    public ConnectServlet() {
+    public ConnectServlet() throws UndefinedEnvironmentVariableException {
         this.responseWriter = new ResponseWriter();
+        this.requestValidator = new RequestValidator(new AppSetup().getAuthToken());
     }
 
-    public ConnectServlet(ResponseWriter responseWriter) {
+    public ConnectServlet(RequestValidator requestValidator, ResponseWriter responseWriter) {
+        this.requestValidator = requestValidator;
         this.responseWriter = responseWriter;
     }
 
@@ -38,10 +46,9 @@ public class ConnectServlet extends HttpServlet {
             throws ServletException, IOException {
         if (isValidRequest(request)) {
             String r = getXMLResponse();
-
             responseWriter.writeIn(response, r);
         } else {
-            response.getOutputStream().write("Invalid twilio request".getBytes());
+            responseWriter.writeIn(response, "Invalid twilio request");
         }
     }
 
@@ -73,8 +80,18 @@ public class ConnectServlet extends HttpServlet {
      * @return boolean determining validity of the request
      */
     private boolean isValidRequest(HttpServletRequest request) {
-        // Review the status of this implementation.
-        return true;
+        String url = request.getRequestURL().toString();
+        Map<String, String> params = new HashMap<>();
+
+        Enumeration<String> names = request.getParameterNames();
+        while (names.hasMoreElements()) {
+            String currentName = names.nextElement();
+            params.put(currentName, request.getParameter(currentName));
+        }
+
+        String signature = request.getHeader("X-Twilio-Signature");
+
+        return requestValidator.validate(url, params, signature);
     }
 
 }
