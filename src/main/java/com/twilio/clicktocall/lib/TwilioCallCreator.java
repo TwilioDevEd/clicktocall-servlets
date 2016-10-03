@@ -18,6 +18,6 @@ public class TwilioCallCreator {
         return new CallCreator(
                 new PhoneNumber(from),
                 new PhoneNumber(to),
-                uri).execute(this.client);
+                uri).create(this.client);
     }
 }
