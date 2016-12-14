@@ -66,7 +66,7 @@ public class ConnectServlet extends HttpServlet {
         VoiceResponse response = new VoiceResponse.Builder()
                 .say(new Say.Builder(
                         "Thanks for contacting our sales department. Our " +
-                                "next available representative will take your call. ").build())
+                                "next available representative will take your call.").build())
                 .dial(dial)
                 .build();
 

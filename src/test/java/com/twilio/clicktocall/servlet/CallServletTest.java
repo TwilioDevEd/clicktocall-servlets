@@ -53,7 +53,8 @@ public class CallServletTest {
         // Given
         when(request.getRequestURL()).thenReturn(new StringBuffer("http://example.com"));
         when(request.getRequestURI()).thenReturn("/call");
-        when(request.getParameter("phone")).thenReturn("to-phone-number");
+        when(request.getParameter("userNumber")).thenReturn("to-phone-number");
+        when(request.getParameter("salesNumber")).thenReturn("sales-phone-number");
         when(response.getOutputStream()).thenReturn(outputStream);
         when(appSetup.getTwilioNumber()).thenReturn("twilio-number");
 
@@ -64,7 +65,7 @@ public class CallServletTest {
 
         // Then
         verify(twilioCallCreator, times(1)).create(
-                "twilio-number", "to-phone-number", new URI("http://example.com/connect"));
+                "twilio-number", "to-phone-number", new URI("http://example.com/connect/sales-phone-number"));
 
         JSONObject o = new JSONObject();
         o.put("message", "Phone call incoming!");

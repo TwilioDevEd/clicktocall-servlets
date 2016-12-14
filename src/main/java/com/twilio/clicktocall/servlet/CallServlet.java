@@ -51,9 +51,9 @@ public class CallServlet extends HttpServlet {
             throws ServletException, IOException {
         String userNumber = request.getParameter("userNumber");
         String salesNumber = request.getParameter("salesNumber");
-        if (userNumber == null) {
+        if (userNumber == null || salesNumber == null) {
             response.getOutputStream()
-                    .write(getJSONResponse("The phone number field can't be empty").getBytes());
+                    .write(getJSONResponse("Both phone numbers need to be provided").getBytes());
             return;
         }
 
