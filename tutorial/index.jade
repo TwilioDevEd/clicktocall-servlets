@@ -49,15 +49,15 @@
       For more instructions on how to run the application refer to the [app's
       readme file](//github.com/TwilioDevEd/clicktocall-servlets/blob/master/README.md).
 
-  .step(data-title="The Web Form", data-file='src/main/webapp/index.html', data-highlight="26-40")
+  .step(data-title="The Web Form", data-file='src/main/webapp/index.html', data-highlight="26-46")
     :markdown
       ## The Web Form
 
       The first step to create a real click-to-call solution is by building the form that your
-      user needs to fill on the web. No need to overthink this, the real goal is to POST the user's
-      phone number to your controller.
+      user needs to fill on the web. No need to overthink this, the real goal is to POST the user's and sales
+      team's phone numbers to your controller.
 
-      So what information does this form need? An input for the phone number and
+      So what information does this form need? An input for the phone number, another for the sales team number and
       a submit button. Since the page doesn't need to render new content after clicking, we decided to
       implement the POST action via Ajax using jQuery. Let's take a look at it.
 
@@ -84,7 +84,7 @@
   .step(
       data-title='Making a Phone Call',
       data-file='src/main/java/com/twilio/clicktocall/servlet/CallServlet.java',
-      data-highlight="26-34, 42-76")
+      data-highlight="26-34, 42-80")
     :markdown
       ## Making a Phone Call
 
@@ -110,7 +110,7 @@
   .step(
       data-title="Validating Twilio's Request",
       data-file='src/main/java/com/twilio/clicktocall/servlet/ConnectServlet.java',
-      data-highlight='77-95')
+      data-highlight='83-102')
     :markdown
       ## Validating Twilio's Request
 
@@ -133,14 +133,13 @@
   .step(
     data-title='Generating TwiML',
     data-file='src/main/java/com/twilio/clicktocall/servlet/ConnectServlet.java',
-    data-highlight='56-75')
+    data-highlight='55-80')
     :markdown
       ## Generating TwiML
 
       TwiML is a set of [simple verbs][verbs] written in XML that Twilio reads as instructions.
-      In this case our instructions inform Twilio to simply SAY something to the user. If we wanted
-      to connect the user to a real support agent, we would have to add a
-      [Dial verb](//www.twilio.com/docs/api/twiml/dial) that specifies the support agent's number
+      In this case our instructions inform Twilio to [SAY](https://www.twilio.com/docs/api/twiml/say)
+      something to the user and then  [DIAL](//www.twilio.com/docs/api/twiml/dial) the support agent's number
       so the customer can talk to him/her.
 
       In order to make writing TwiML easy, many of the helper libraries have methods that generate

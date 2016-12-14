@@ -39,6 +39,7 @@ public class ConnectServletTest {
     public void shouldRespondWithSayWhenTheRequestIsValid() throws ServletException, IOException {
         // Given
         when(request.getRequestURL()).thenReturn(new StringBuffer("http://example.com"));
+        when(request.getPathInfo()).thenReturn("/+123456");
         when(request.getParameterNames()).thenReturn(Collections.enumeration(Arrays.asList("From")));
         when(requestValidator.validate(anyString(), anyMap(), anyString())).thenReturn(true);
         ConnectServlet servlet = new ConnectServlet(requestValidator, responseWriter);
@@ -46,7 +47,8 @@ public class ConnectServletTest {
         // When
         servlet.doPost(request, response);
         String expectedTwiML =
-                "<Response><Say>If this were a real click to call implementation, you would be connected to an agent at this point.</Say><Hangup/></Response>";
+                "<Response><Say>Thanks for contacting our sales department. Our next available representative" +
+                        " will take your call.</Say><Dial><Number>+123456</Number></Dial></Response>";
 
         // Then
         verify(responseWriter, times(1)).writeIn(response, expectedTwiML);
