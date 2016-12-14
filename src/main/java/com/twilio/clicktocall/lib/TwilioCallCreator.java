@@ -16,8 +16,8 @@ public class TwilioCallCreator {
 
     public Call create(String from, String to, URI uri) {
         return new CallCreator(
-                new PhoneNumber(from),
                 new PhoneNumber(to),
+                new PhoneNumber(from),
                 uri).create(this.client);
     }
 }

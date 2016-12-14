@@ -3,10 +3,8 @@ package com.twilio.clicktocall.servlet;
 import com.twilio.clicktocall.exceptions.UndefinedEnvironmentVariableException;
 import com.twilio.clicktocall.lib.AppSetup;
 import com.twilio.security.RequestValidator;
-import com.twilio.twiml.Hangup;
-import com.twilio.twiml.Say;
-import com.twilio.twiml.TwiMLException;
-import com.twilio.twiml.VoiceResponse;
+import com.twilio.twiml.*;
+import com.twilio.twiml.Number;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +16,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/connect")
+@WebServlet("/connect/*")
 public class ConnectServlet extends HttpServlet {
     private RequestValidator requestValidator;
     private ResponseWriter responseWriter;
@@ -37,7 +35,8 @@ public class ConnectServlet extends HttpServlet {
     /**
      * Method that handles /connect request and responds with the TwiML after validating
      * the authenticity of the request
-     * @param request incoming servlet request object
+     *
+     * @param request  incoming servlet request object
      * @param response servlet response object
      * @throws ServletException
      * @throws IOException
@@ -45,24 +44,30 @@ public class ConnectServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (isValidRequest(request)) {
-            String r = getXMLResponse();
+            String salesNumber = extractSalesNumber(request);
+            String r = getXMLResponse(salesNumber);
             responseWriter.writeIn(response, r);
         } else {
             responseWriter.writeIn(response, "Invalid twilio request");
         }
     }
 
-
     /**
      * Generates the TwiML with a Say and Hangout verb
+     *
+     * @param salesNumber
      * @return String with the TwiML
      */
-    private String getXMLResponse() {
-        VoiceResponse response =  new VoiceResponse.Builder()
+    private String getXMLResponse(String salesNumber) {
+        Number number = new Number.Builder(salesNumber).build();
+        Dial dial = new Dial.Builder()
+                .number(number)
+                .build();
+        VoiceResponse response = new VoiceResponse.Builder()
                 .say(new Say.Builder(
-                        "If this were a real click to call implementation, " +
-                        "you would be connected to an agent at this point.").build())
-                .hangup(new Hangup())
+                        "Thanks for contacting our sales department. Our " +
+                                "next available representative will take your call. ").build())
+                .dial(dial)
                 .build();
 
         try {
@@ -74,8 +79,10 @@ public class ConnectServlet extends HttpServlet {
         return "";
     }
 
+
     /**
      * Uses TwilioUtils to validate that the incoming request comes from Twilio automated services
+     *
      * @param request passed servlet request to extract parameters necessary for validation
      * @return boolean determining validity of the request
      */
@@ -92,6 +99,19 @@ public class ConnectServlet extends HttpServlet {
         String signature = request.getHeader("X-Twilio-Signature");
 
         return requestValidator.validate(url, params, signature);
+    }
+
+    /**
+     * Returns the sales number that was passed as a path parameter
+     * @param request
+     * @return
+     */
+    private String extractSalesNumber(HttpServletRequest request) {
+        String[] pathElements = request.getPathInfo().split("/");
+        if(pathElements.length > 0) {
+            return pathElements[pathElements.length - 1];
+        }
+        return "";
     }
 
 }
