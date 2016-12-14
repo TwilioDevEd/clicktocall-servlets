@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URLEncoder;
 
 
 @WebServlet("/call")
@@ -48,18 +49,21 @@ public class CallServlet extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String phoneNumber = request.getParameter("phone");
-        if (phoneNumber == null) {
+        String userNumber = request.getParameter("userNumber");
+        String salesNumber = request.getParameter("salesNumber");
+        if (userNumber == null || salesNumber == null) {
             response.getOutputStream()
-                    .write(getJSONResponse("The phone number field can't be empty").getBytes());
+                    .write(getJSONResponse("Both phone numbers need to be provided").getBytes());
             return;
         }
 
         // Full URL to the end point that will respond with the call TwiML.
-        String url = request.getRequestURL().toString().replace(request.getRequestURI(), "") + "/connect";
+        String encodedSalesNumber = URLEncoder.encode(salesNumber, "UTF-8");
+        String url = request.getRequestURL().toString().replace(request.getRequestURI(), "");
+        url += "/connect/" + encodedSalesNumber;
 
         try {
-            twilioCallCreator.create(this.twilioNumber, phoneNumber, new URI(url));
+            twilioCallCreator.create(this.twilioNumber, userNumber, new URI(url));
         } catch (TwilioException e) {
             String message =
                     "Twilio rest client error: " + e.getMessage() + "\n" +
