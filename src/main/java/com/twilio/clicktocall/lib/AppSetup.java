@@ -15,27 +15,21 @@ public class AppSetup {
   }
 
   public String getAccountSid() throws UndefinedEnvironmentVariableException {
-    String sid = env.get("TWILIO_ACCOUNT_SID");
-    if (sid == null) {
-      throw new UndefinedEnvironmentVariableException("TWILIO_ACCOUNT_SID is not defined");
-    } else {
-      return sid;
-    }
+    return getEnvironmentVariable("TWILIO_ACCOUNT_SID");
   }
 
   public String getAuthToken() throws UndefinedEnvironmentVariableException {
-    String token = env.get("TWILIO_AUTH_TOKEN");
-    if (token == null) {
-      throw new UndefinedEnvironmentVariableException("TWILIO_AUTH_TOKEN is not set");
-    } else {
-      return token;
-    }
+    return getEnvironmentVariable("TWILIO_AUTH_TOKEN");
   }
 
   public String getTwilioNumber() throws UndefinedEnvironmentVariableException {
-    String phoneNumber = env.get("TWILIO_NUMBER");
+    return getEnvironmentVariable("TWILIO_NUMBER");
+  }
+
+  private String getEnvironmentVariable(String variableName) throws UndefinedEnvironmentVariableException {
+    String phoneNumber = env.get(variableName);
     if (phoneNumber == null) {
-      throw new UndefinedEnvironmentVariableException("TWILIO_NUMBER is not set");
+      throw new UndefinedEnvironmentVariableException(variableName + " is not set");
     } else {
       return phoneNumber;
     }
