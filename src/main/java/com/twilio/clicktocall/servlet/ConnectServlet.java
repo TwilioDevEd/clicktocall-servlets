@@ -3,8 +3,11 @@ package com.twilio.clicktocall.servlet;
 import com.twilio.clicktocall.exceptions.UndefinedEnvironmentVariableException;
 import com.twilio.clicktocall.lib.AppSetup;
 import com.twilio.security.RequestValidator;
-import com.twilio.twiml.*;
-import com.twilio.twiml.Number;
+import com.twilio.twiml.VoiceResponse;
+import com.twilio.twiml.voice.Say;
+import com.twilio.twiml.voice.Dial;
+import com.twilio.twiml.voice.Number;
+import com.twilio.twiml.TwiMLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
