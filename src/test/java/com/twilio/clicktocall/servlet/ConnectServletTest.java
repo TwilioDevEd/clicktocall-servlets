@@ -47,7 +47,7 @@ public class ConnectServletTest {
         // When
         servlet.doPost(request, response);
         String expectedTwiML =
-                "<Response><Say>Thanks for contacting our sales department. Our next available representative" +
+                "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Say>Thanks for contacting our sales department. Our next available representative" +
                         " will take your call.</Say><Dial><Number>+123456</Number></Dial></Response>";
 
         // Then
