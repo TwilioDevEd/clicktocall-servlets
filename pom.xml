@@ -7,12 +7,14 @@
     <groupId>com.twilio.clicktocall</groupId>
     <artifactId>twilio-click-to-call</artifactId>
     <version>1.0</version>
+    <packaging>war</packaging>
 
     <properties>
-        <jetty.version>9.3.3.v20150827</jetty.version>
+        <jetty.version>9.4.16.v20190411</jetty.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
+        <exec-mvn-plugin.version>1.6.0</exec-mvn-plugin.version>
     </properties>
 
     <dependencies>
@@ -67,7 +69,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>1.1</version>
+                <version>${exec-mvn-plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
