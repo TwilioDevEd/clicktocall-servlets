@@ -31,7 +31,6 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: ${{ matrix.java }}
-      - name: Build with Gradle
-        run: ./gradlew build
-      - name: Run tests
-        run: ./gradlew acceptanceTest
+      - name: Build with Maven
+        # Ensure that your code builds, tests pass, and a package can be created
+        run: mvn --batch-mode --update-snapshots verify
