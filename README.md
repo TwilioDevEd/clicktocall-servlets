@@ -3,7 +3,7 @@
 </a>
 
 # Click to Call Servlets
-[![Build Status](https://travis-ci.org/TwilioDevEd/clicktocall-servlets.svg?branch=master)](https://travis-ci.org/TwilioDevEd/clicktocall-servlets)
+[![Java Servlet CI](https://github.com/TwilioDevEd/clicktocall-servlets/actions/workflows/gradle.yml/badge.svg)](https://github.com/TwilioDevEd/clicktocall-servlets/actions/workflows/gradle.yml)
 
 An example application implementing Click to Call using Twilio.
 
