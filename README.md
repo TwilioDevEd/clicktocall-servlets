@@ -9,29 +9,38 @@ An example application implementing Click to Call using Twilio.
 
 [Read the full tutorial here](https://www.twilio.com/docs/tutorials/walkthrough/click-to-call/java/servlets)!
 
-## Run the application
+## Set up
+
+### Requirements
+
+- [Java Development Kit](https://adoptopenjdk.net/) version 8
+- [ngrok](https://ngrok.com)
+- A Twilio account - [sign up](https://www.twilio.com/try-twilio)
+
+### Twilio Account Settings
+
+This application should give you a ready-made starting point for writing your
+own appointment reminder application. Before we begin, we need to collect
+all the config values we need to run the application:
+
+| Config Value | Description                                                                                                                                                  |
+| :---------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Account Sid  | Your primary Twilio account identifier - find this [in the Console](https://www.twilio.com/console).                                                         |
+| Auth Token   | Used to authenticate - [just like the above, you'll find this here](https://www.twilio.com/console).                                                         |
+| Phone number | A Twilio phone number in [E.164 format](https://en.wikipedia.org/wiki/E.164) - you can [get one here](https://www.twilio.com/console/phone-numbers/incoming) |
+
+### Local development
 
 1. Clone the repository and `cd` into it.
 
 1. The application uses Maven to manage dependencies.
 
-1. Edit the sample configuration file `.env.example` and edit it to match your configuration.
+1. Set your environment variables
 
-   Once you have edited the `.env.example` file, if you are using a unix operating system,
-   just use the `source` command to load the variables into your environment:
-
-   ```bash
-   $ source .env.example
-   ```
-
-   If you are using a different operating system, make sure that all the
-   variables from the .env.example file are loaded into your environment.
-
-   You can find your `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN` under
-   your
-   [Twilio Account Settings](//www.twilio.com/user/account/settings).
-   You can buy Twilio phone numbers at [Twilio numbers](//www.twilio.com/user/account/phone-numbers/search)
-   `TWILIO_NUMBER` should be set to the phone number you purchased above.
+    ```bash
+    cp .env.example .env
+    ```
+   See [Twilio Account Settings](#twilio-account-settings) to locate the necessary environment variables.
 
 1. Configure Twilio to call your webhooks.
 
@@ -52,7 +61,7 @@ An example application implementing Click to Call using Twilio.
 1. Run the application using Maven.
 
    ```bash
-   $ mvn compile && mvn jetty:run
+   mvn compile && mvn jetty:run
    ```
 
    This will run the embedded Jetty application server that uses port 8080. You can change this value
@@ -61,7 +70,7 @@ An example application implementing Click to Call using Twilio.
 1. Expose the application to the wider Internet using [ngrok](https://ngrok.com/)
 
    ```bash
-   $ ngrok 8080
+   ngrok 8080
    ```
 
    Once you have started ngrok, update your Twilio's number voice URL
@@ -83,7 +92,7 @@ This application uses this Twilio helper library.
 1. Run at the top-level directory.
 
    ```bash
-   $ mvn compile test
+   mvn compile test
    ```
 
 ## Meta
