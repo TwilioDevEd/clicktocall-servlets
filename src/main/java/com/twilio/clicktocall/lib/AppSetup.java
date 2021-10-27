@@ -1,6 +1,7 @@
 package com.twilio.clicktocall.lib;
 
 import com.twilio.clicktocall.exceptions.UndefinedEnvironmentVariableException;
+import io.github.cdimascio.dotenv.Dotenv;
 
 import java.util.Map;
 
@@ -8,11 +9,7 @@ import java.util.Map;
  * Class that holds methods to obtain configuration parameters from the environment.
  */
 public class AppSetup {
-  private Map<String, String> env;
-
-  public AppSetup() {
-    this.env = System.getenv();
-  }
+  private static final Dotenv dotenv = Dotenv.load();
 
   public String getAccountSid() throws UndefinedEnvironmentVariableException {
     return getEnvironmentVariable("TWILIO_ACCOUNT_SID");
@@ -27,11 +24,11 @@ public class AppSetup {
   }
 
   private String getEnvironmentVariable(String variableName) throws UndefinedEnvironmentVariableException {
-    String phoneNumber = env.get(variableName);
-    if (phoneNumber == null) {
+    String variable = dotenv.get(variableName);
+    if (variable == null) {
       throw new UndefinedEnvironmentVariableException(variableName + " is not set");
     } else {
-      return phoneNumber;
+      return variable;
     }
   }
 }

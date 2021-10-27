@@ -33,4 +33,6 @@ jobs:
           java-version: ${{ matrix.java }}
       - name: Build with Maven
         # Ensure that your code builds, tests pass, and a package can be created
-        run: mvn --batch-mode --update-snapshots verify
+        run: |
+          cp .env.example .env
+          mvn --batch-mode --update-snapshots verify
