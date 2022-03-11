@@ -47,16 +47,15 @@ all the config values we need to run the application:
    You will also need to configure Twilio to call your application when calls are received.
 
    You will need to provision at least one Twilio number with voice capabilities
-   so the application's users can trigger phone calls. You can buy a number [right
-   here](//www.twilio.com/user/account/phone-numbers/search). Once you have
-   a number you need to configure your number to work with your application. Open
+   so the application's users can trigger phone calls. You can [buy a number here](https://www.twilio.com/user/account/phone-numbers/search).
+   Once you have a number you need to configure your number to work with your application. Open
    [the number management page](//www.twilio.com/user/account/phone-numbers/incoming)
    and open a number's configuration by clicking on it.
 
    Remember that the number where you change the voice webhooks must be the same one you set on
    the `TWILIO_NUMBER` environment variable.
 
-   ![Configure Voice](http://howtodocs.s3.amazonaws.com/twilio-number-config-all-med.gif)
+   [Learn how to configure a Twilio phone number for Programmable Voice](https://www.twilio.com/docs/voice/quickstart/java#configure-your-webhook-url)
 
 1. Run the application using Maven.
 
